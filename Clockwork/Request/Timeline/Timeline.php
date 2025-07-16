@@ -34,7 +34,10 @@ class Timeline
 	public function find($name)
 	{
 		foreach ($this->events as $event) {
-			if ($event->name == $name) return $event;
+			if ($event->name == $name) {
+				// only return events if they are not done yet. Allows for having multiple events with the same description on the timeline
+				if($event->end === null) return $event;
+			}
 		}
 	}
 
